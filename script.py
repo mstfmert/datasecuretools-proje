@@ -2,36 +2,45 @@
 import requests
 from datetime import datetime
 
-# GÜVENLİK: API anahtarı artık kodun içinde değil, sistem değişkenlerinden çekiliyor.
+# API anahtarı GitHub Secrets'tan gelecek
 API_KEY = os.getenv("DEEPSEEK_API_KEY")
 API_URL = "https://api.deepseek.com/v1/chat/completions"
 
 def generate_automated_blog():
     if not API_KEY:
-        print("❌ HATA: DEEPSEEK_API_KEY bulunamadı. Lütfen GitHub Secrets veya Environment Variables kontrol edin.")
+        print("❌ ERROR: DEEPSEEK_API_KEY not found.")
         return
 
     target_dir = os.path.join(os.getcwd(), 'src', 'content', 'blog')
     os.makedirs(target_dir, exist_ok=True)
 
-    # 1000+ Kelime, İngilizce, SEO ve Trend Odaklı Prompt
+    # ÖRNEĞE TAM UYUMLU PROMPT
     prompt = """
-    Write a comprehensive, SEO-optimized English blog post about a trending technology topic (AI, Cybersecurity, Web3, or Cloud Computing) as of March 2026.
+    Write a technical, high-quality English blog post similar to a 'Research Lab' report.
+    Topic: A trending 2026 technology (AI, Cybersecurity, Cloud, or Networking).
     
-    REQUIREMENTS:
-    1. LENGTH: Minimum 1200 words.
-    2. FORMAT: Start exactly with this Astro-compatible frontmatter:
+    STRUCTURE REQUIREMENTS (FOLLOW EXACTLY):
+    1. FRONTMATTER:
     ---
-    title: "[SEO Optimized Title]"
-    description: "[Engaging 150-character SEO description]"
-    pubDate: "{date}"
-    author: "Mustafa Mert"
-    tags: ["tech", "ai", "innovation"]
+    title: "[A Technical & Catchy Title]"
+    description: "[150-character technical SEO summary]"
+    pubDate: {date}
+    author: "DataSecureTools Research Labs"
+    tags: ["Tech", "Innovation", "Analysis"]
     ---
     
-    3. STRUCTURE: Use H2, H3 subheadings, bullet points, and bold key terms.
-    4. CONTENT: Deep-dive analysis of current global tech trends.
-    5. LANGUAGE: Professional and fluent English.
+    2. CONTENT START:
+    Start with a '# [Same Title]' as an H1 header.
+    Follow with an engaging introduction mentioning 'DataSecureTools'.
+    
+    3. BODY:
+    - Minimum 1200 words.
+    - Use H2 (##) and H3 (###) for subheadings.
+    - Use bold text for key terms.
+    - Use bullet points for lists.
+    - End with a 'Conclusion' section.
+    
+    4. LANGUAGE: Professional, technical, and academic English.
     """.format(date=datetime.now().strftime('%Y-%m-%d'))
 
     headers = {
@@ -42,7 +51,7 @@ def generate_automated_blog():
     data = {
         "model": "deepseek-chat",
         "messages": [
-            {"role": "system", "content": "You are an expert tech journalist and SEO specialist writing long-form content for Astro.build sites."},
+            {"role": "system", "content": "You are a senior technical writer at DataSecureTools Research Labs. You write in-depth, SEO-optimized markdown reports."},
             {"role": "user", "content": prompt}
         ],
         "temperature": 0.7,
@@ -50,20 +59,23 @@ def generate_automated_blog():
     }
 
     try:
-        print("🤖 DeepSeek is crafting a 1000+ word masterpiece...")
+        print("🤖 Crafting a specialized report for DataSecureTools...")
         response = requests.post(API_URL, json=data, headers=headers, timeout=180)
         response.raise_for_status()
         
         content = response.json()['choices'][0]['message']['content']
         
-        # Benzersiz dosya ismi (Saat-Dakika-Saniye dahil)
+        # Markdown bloğu (```markdown) temizleme (Astro'da hata verir)
+        if content.startswith("```"):
+            content = "\n".join(content.split("\n")[1:-1])
+
         filename = f"blog-{datetime.now().strftime('%Y%m%d-%H%M%S')}.md"
         file_path = os.path.join(target_dir, filename)
 
         with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content)
+            f.write(content.strip())
             
-        print(f"✅ SUCCESS: {filename} created successfully.")
+        print(f"✅ SUCCESS: {filename} matches your template.")
 
     except Exception as e:
         print(f"❌ ERROR: {e}")

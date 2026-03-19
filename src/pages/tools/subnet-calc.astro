@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/MainLayout.astro';
+export const prerender = true;
+---
+<Layout title="Advanced IPv4 Subnet Calculator | CIDR & Network Audit | DataSecureTools">
+  <div style="max-width: 1300px; margin: 40px auto; padding: 0 20px; font-family: 'Inter', sans-serif; color: #0f172a;">
+    
+    <div style="width: 100%; height: 90px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.8rem;">
+      ADVERTISEMENT - GOOGLE ADSENSE
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 340px; gap: 40px;">
+      <main>
+        <div style="background: #ffffff; border-radius: 32px; padding: 50px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.03); border: 1px solid #f1f5f9;">
+          <header style="margin-bottom: 40px;">
+            <span style="background: #f0fdf4; color: #16a34a; padding: 6px 14px; border-radius: 100px; font-size: 0.85rem; font-weight: 700;">NETWORK ARCHITECTURE</span>
+            <h1 style="font-size: 2.8rem; font-weight: 900; margin-top: 15px; letter-spacing: -1px;">Subnet Calculator</h1>
+            <p style="color: #64748b; font-size: 1.2rem; margin-top: 10px;">Calculate CIDR ranges, wildcard masks, and usable IP address pools instantly.</p>
+          </header>
+
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 35px;">
+            <div style="background: #f8fafc; padding: 8px; border-radius: 20px; border: 1px solid #e2e8f0;">
+               <input type="text" id="ip" placeholder="IP Address (e.g. 192.168.1.1)" style="width: 100%; padding: 18px 25px; border: none; background: transparent; outline: none; font-size: 1.1rem;" />
+            </div>
+            <div style="background: #f8fafc; padding: 8px; border-radius: 20px; border: 1px solid #e2e8f0;">
+               <select id="cidr" style="width: 100%; padding: 18px 10px; border: none; background: transparent; outline: none; font-size: 1.1rem; font-weight: 600; cursor: pointer;">
+                  </select>
+            </div>
+          </div>
+          
+          <button id="runBtn" style="width: 100%; background: #0f172a; color: white; padding: 20px; border-radius: 20px; border: none; font-weight: 800; font-size: 1.2rem; cursor: pointer; transition: 0.3s;">CALCULATE SUBNET</button>
+
+          <div id="results" style="display: none; margin-top: 50px; animation: slideUp 0.6s ease-out;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 40px;">
+              <div style="background: #ffffff; padding: 25px; border-radius: 24px; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                <span style="font-size: 0.75rem; font-weight: 800; color: #94a3b8;">NETWORK ADDRESS</span>
+                <div id="v-net" style="font-size: 1.3rem; font-weight: 800; color: #0f172a; margin-top: 8px;">-</div>
+              </div>
+              <div style="background: #ffffff; padding: 25px; border-radius: 24px; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                <span style="font-size: 0.75rem; font-weight: 800; color: #94a3b8;">BROADCAST ADDRESS</span>
+                <div id="v-broad" style="font-size: 1.3rem; font-weight: 800; color: #ef4444; margin-top: 8px;">-</div>
+              </div>
+              <div style="background: #ffffff; padding: 25px; border-radius: 24px; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                <span style="font-size: 0.75rem; font-weight: 800; color: #94a3b8;">USABLE IP RANGE</span>
+                <div id="v-range" style="font-size: 1.1rem; font-weight: 800; color: #3b82f6; margin-top: 8px;">-</div>
+              </div>
+              <div style="background: #ffffff; padding: 25px; border-radius: 24px; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                <span style="font-size: 0.75rem; font-weight: 800; color: #94a3b8;">TOTAL USABLE HOSTS</span>
+                <div id="v-hosts" style="font-size: 1.3rem; font-weight: 800; color: #10b981; margin-top: 8px;">-</div>
+              </div>
+            </div>
+
+            <div style="background: #0f172a; border-radius: 24px; padding: 40px; border: 1px solid #334155;">
+              <span style="color: #64748b; font-size: 0.75rem; font-weight: 800; text-transform: uppercase;">Binary Manipulation Log</span>
+              <pre id="v-raw" style="font-family: 'Fira Code', monospace; color: #38bdf8; font-size: 0.9rem; margin-top: 20px; line-height: 1.6; white-space: pre-wrap;"></pre>
+            </div>
+          </div>
+        </div>
+
+        <article style="margin-top: 60px; line-height: 1.8; color: #475569;">
+          <h2 style="color: #0f172a; font-size: 1.8rem; font-weight: 800;">Mastering IPv4 Subnetting & CIDR Notation</h2>
+          <p style="margin-top: 20px;">Subnetting is the practice of dividing a single physical network into multiple logical sub-networks. This improves security, reduces congestion, and allows for efficient IP address management. Our <strong>Advanced Subnet Calculator</strong> helps you determine the boundaries of your network, ensuring that your routing tables and VLAN configurations are optimized for maximum performance.</p>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+            <div>
+              <h3 style="color: #0f172a; font-size: 1.2rem; font-weight: 700;">CIDR vs Subnet Mask</h3>
+              <p style="font-size: 0.9rem;">Classless Inter-Domain Routing (CIDR) uses a slash notation like /24 to represent the number of bits in the mask, simplifying IP allocation compared to old-school subnet masks.</p>
+            </div>
+            <div>
+              <h3 style="color: #0f172a; font-size: 1.2rem; font-weight: 700;">Broadcast & Usable Pools</h3>
+              <p style="font-size: 0.9rem;">Every subnet has two reserved addresses: the Network ID (first) and the Broadcast ID (last). The addresses in between form your usable host pool.</p>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <aside>
+        <div style="width: 100%; height: 600px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 24px; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
+          ADSENSE SKYSCRAPER
+        </div>
+
+        <div style="background: #f0fdf4; padding: 30px; border-radius: 32px;">
+          <h3 style="font-size: 1.1rem; font-weight: 900; color: #0f172a; margin-bottom: 25px;">Architect Advice</h3>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="background: white; padding: 20px; border-radius: 18px;">
+              <strong style="color: #16a34a; display: block; margin-bottom: 5px; font-size: 0.9rem;">VLAN Segmentation</strong>
+              <p style="font-size: 0.8rem; color: #64748b;">Isolate Guest WiFi from Production servers by using a /26 or /27 subnet to limit the broadcast domain.</p>
+            </div>
+            <div style="background: white; padding: 20px; border-radius: 18px;">
+              <strong style="color: #3b82f6; display: block; margin-bottom: 5px; font-size: 0.9rem;">Public IP Efficiency</strong>
+              <p style="font-size: 0.8rem; color: #64748b;">When leasing public IPs, use CIDR calculators to ensure you don't waste expensive IPv4 addresses.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style> @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } } </style>
+
+<script>
+  const cidrSelect = document.getElementById('cidr');
+  for(let i=32; i>=1; i--) {
+    const opt = document.createElement('option');
+    opt.value = i.toString();
+    opt.innerText = "/" + i + " (" + (Math.pow(2, 32-i) - (i <= 30 ? 2 : 0)) + " hosts)";
+    if(i === 24) opt.selected = true;
+    cidrSelect.appendChild(opt);
+  }
+
+  function ipToLong(ip) {
+    return ip.split('.').reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0) >>> 0;
+  }
+
+  function longToIp(long) {
+    return [long >>> 24, (long >> 16) & 255, (long >> 8) & 255, long & 255].join('.');
+  }
+
+  document.getElementById('runBtn')?.addEventListener('click', () => {
+    const ipVal = (document.getElementById('ip') as HTMLInputElement).value.trim();
+    const cidrVal = parseInt((document.getElementById('cidr') as HTMLSelectElement).value);
+
+    if(!/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/.test(ipVal)) return alert("Invalid IP Format");
+
+    const ipLong = ipToLong(ipVal);
+    const mask = (cidrVal === 0 ? 0 : 0xFFFFFFFF << (32 - cidrVal)) >>> 0;
+    const network = (ipLong & mask) >>> 0;
+    const broadcast = (network | ~mask) >>> 0;
+    const hosts = cidrVal <= 30 ? (broadcast - network - 1) : (cidrVal === 31 ? 2 : 1);
+
+    document.getElementById('v-net').innerText = longToIp(network);
+    document.getElementById('v-broad').innerText = longToIp(broadcast);
+    document.getElementById('v-range').innerText = (cidrVal <= 30) ? `${longToIp(network + 1)} - ${longToIp(broadcast - 1)}` : 'N/A';
+    document.getElementById('v-hosts').innerText = (hosts < 0 ? 0 : hosts).toLocaleString();
+    
+    document.getElementById('v-raw').innerText = `[IP]: ${ipVal}\n[CIDR]: /${cidrVal}\n[MASK]: ${longToIp(mask)}\n[W.CARD]: ${longToIp(~mask >>> 0)}\n[BINARY]: ${mask.toString(2).padStart(32, '0')}`;
+    document.getElementById('results').style.display = "block";
+  });
+</script>

@@ -1,0 +1,76 @@
+﻿---
+import Layout from '../layouts/MainLayout.astro';
+---
+
+<Layout title="Hakkımızda | DataSecureTools">
+  <main class="about-container">
+    <header class="about-header">
+      <span class="vision-badge">Vizyonumuz: Şeffaf İnternet</span>
+      <h1>Dijital Dünyayı Daha <span class="highlight">Güvenli</span> Kılıyoruz</h1>
+      <p class="lead-text">DataSecureTools, karmaşık siber güvenlik ve veri analiz süreçlerini herkes için erişilebilir hale getirmek amacıyla kurulmuş bir topluluk projesidir.</p>
+    </header>
+
+    <div class="about-grid">
+      <section class="story-section">
+        <h2>Hikayemiz ve Vizyonumuz</h2>
+        <p>İnternet ekosistemi her geçen gün büyürken, dijital güvenlik araçları genellikle yüksek maliyetli veya son kullanıcı için aşırı karmaşık hale geldi. DataSecureTools olarak biz, <strong>"Güvenlik bir lüks değil, haktır"</strong> prensibiyle yola çıktık.</p>
+        <p>Açık kaynak vizyonumuzla, profesyonel kalitedeki analiz araçlarını hiçbir abonelik ücreti veya gizli maliyet olmadan tamamen ücretsiz sunuyoruz. Amacımız, web yöneticilerinden siber güvenlik meraklılarına kadar herkesin kendi dijital ayak izini kontrol edebilmesini sağlamaktır.</p>
+      </section>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="icon">🔓</div>
+          <h3>Tamamen Ücretsiz</h3>
+          <p>Tüm araçlarımız, herhangi bir kısıtlama olmaksızın herkesin kullanımına açıktır.</p>
+        </div>
+        <div class="value-card">
+          <div class="icon">🛡️</div>
+          <h3>Gizlilik Odaklı</h3>
+          <p>Yaptığınız analizler sunucularımızda saklanmaz, verileriniz size aittir.</p>
+        </div>
+        <div class="value-card">
+          <div class="icon">🚀</div>
+          <h3>Sürekli Gelişim</h3>
+          <p>Teknoloji değiştikçe araç setimizi güncelliyor ve yeni nesil tehditlere karşı hazır hale getiriyoruz.</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="mission-cta">
+      <h2>Bize Katılın</h2>
+      <p>Siz de dijital dünyayı daha şeffaf bir yer haline getirme yolculuğumuzda bize katılabilir, geri bildirimlerinizle dükkanın gelişimine katkıda bulunabilirsiniz.</p>
+      <a href="/contact" class="btn-primary">İletişime Geç</a>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .about-container { max-width: 1100px; margin: 80px auto; padding: 0 20px; font-family: 'Inter', sans-serif; color: #334155; }
+  .about-header { text-align: center; margin-bottom: 80px; }
+  .vision-badge { background: #eef2ff; color: #4f46e5; padding: 6px 16px; border-radius: 100px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+  .about-header h1 { font-size: 3.8rem; font-weight: 900; color: #0f172a; margin: 25px 0; letter-spacing: -2px; line-height: 1.1; }
+  .highlight { color: #4f46e5; }
+  .lead-text { font-size: 1.3rem; color: #64748b; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 80px; align-items: center; }
+  .story-section h2 { font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 20px; }
+  .story-section p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
+
+  .values-grid { display: grid; gap: 20px; }
+  .value-card { background: #f8fafc; padding: 30px; border-radius: 24px; border: 1px solid #f1f5f9; transition: transform 0.2s; }
+  .value-card:hover { transform: scale(1.02); }
+  .value-card .icon { font-size: 2rem; margin-bottom: 15px; }
+  .value-card h3 { font-size: 1.25rem; font-weight: 800; color: #0f172a; margin-bottom: 10px; }
+  .value-card p { font-size: 0.95rem; line-height: 1.5; color: #64748b; }
+
+  .mission-cta { background: #0f172a; color: white; padding: 60px; border-radius: 40px; text-align: center; }
+  .mission-cta h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 20px; }
+  .mission-cta p { font-size: 1.2rem; opacity: 0.8; margin-bottom: 30px; }
+  .btn-primary { display: inline-block; background: #4f46e5; color: white; padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 800; transition: background 0.2s; }
+  .btn-primary:hover { background: #4338ca; }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; text-align: center; }
+    .about-header h1 { font-size: 2.5rem; }
+  }
+</style>

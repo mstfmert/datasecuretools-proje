@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/MainLayout.astro';
+export const prerender = true;
+---
+<Layout title="Advanced Online Port Scanner | Security Infrastructure Audit | DataSecureTools">
+  <div style="max-width: 1300px; margin: 40px auto; padding: 0 20px; font-family: 'Inter', sans-serif; color: #0f172a;">
+    
+    <div style="width: 100%; height: 90px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.8rem;">
+      ADVERTISEMENT - GOOGLE ADSENSE
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 340px; gap: 40px;">
+      <main>
+        <div style="background: #ffffff; border-radius: 32px; padding: 50px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.03); border: 1px solid #f1f5f9;">
+          <header style="margin-bottom: 40px;">
+            <span style="background: #fff1f2; color: #e11d48; padding: 6px 14px; border-radius: 100px; font-size: 0.85rem; font-weight: 700;">SECURITY AUDIT</span>
+            <h1 style="font-size: 2.8rem; font-weight: 900; margin-top: 15px; letter-spacing: -1px;">Network Port Scanner</h1>
+            <p style="color: #64748b; font-size: 1.2rem; margin-top: 10px;">Audit open doors in your infrastructure using advanced timing-analysis technology.</p>
+          </header>
+
+          <div style="background: #f8fafc; padding: 8px; border-radius: 20px; display: flex; border: 1px solid #e2e8f0; margin-bottom: 10px;">
+            <input type="text" id="target" placeholder="Enter IP or Domain (e.g. 127.0.0.1)" style="flex: 1; padding: 18px 25px; border: none; background: transparent; outline: none; font-size: 1.1rem;" />
+            <button id="runBtn" style="background: #0f172a; color: white; padding: 0 35px; border-radius: 14px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s;">START SCAN</button>
+          </div>
+          <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 30px; padding-left: 10px;">* Only scans common service ports for security compliance.</p>
+
+          <div id="results" style="display: none; animation: slideUp 0.6s ease-out;">
+            <div id="port-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 40px;">
+                </div>
+
+            <div style="background: #0f172a; border-radius: 24px; padding: 40px; border: 1px solid #334155;">
+              <span style="color: #64748b; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 20px;">Detailed Vulnerability Log</span>
+              <pre id="v-raw" style="font-family: 'Fira Code', monospace; color: #38bdf8; font-size: 0.9rem; margin: 0; line-height: 1.6; white-space: pre-wrap;"></pre>
+            </div>
+          </div>
+        </div>
+
+        <article style="margin-top: 60px; line-height: 1.8; color: #475569;">
+          <h2 style="color: #0f172a; font-size: 1.8rem; font-weight: 800;">Why Port Scanning is a Critical Security Layer?</h2>
+          <p style="margin-top: 20px;">A <strong>Port Scanner</strong> acts as a digital scout, identifying which services on a server are listening for connections. Open ports like <strong>SSH (22)</strong>, <strong>FTP (21)</strong>, or <strong>Database (3306)</strong> can be potential entry points for attackers if not properly secured. Our <strong>Online Port Audit tool</strong> helps webmasters and security teams verify their firewall configurations and ensure that only necessary ports are exposed to the public internet.</p>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+            <div>
+              <h3 style="color: #0f172a; font-size: 1.2rem; font-weight: 700;">Infrastructure Hardening</h3>
+              <p style="font-size: 0.9rem;">Regularly scan your cloud instances to detect "shadow IT" services that may have been left open during development.</p>
+            </div>
+            <div>
+              <h3 style="color: #0f172a; font-size: 1.2rem; font-weight: 700;">Compliance Verification</h3>
+              <p style="font-size: 0.9rem;">Ensure your server meets PCI-DSS or SOC2 compliance standards by keeping non-essential ports filtered.</p>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <aside>
+        <div style="width: 100%; height: 600px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 24px; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; color: #94a3b8; text-align: center; padding: 20px;">
+          ADSENSE SKYSCRAPER AD
+        </div>
+
+        <div style="background: #fff1f2; padding: 30px; border-radius: 32px;">
+          <h3 style="font-size: 1.1rem; font-weight: 900; color: #0f172a; margin-bottom: 25px;">Cyber Advice</h3>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="background: white; padding: 20px; border-radius: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+              <strong style="color: #e11d48; display: block; margin-bottom: 5px; font-size: 0.9rem;">Default Port Risk</strong>
+              <p style="font-size: 0.8rem; color: #64748b;">Moving SSH to a non-standard port (e.g. 2222) can reduce automated brute-force attacks by 90%.</p>
+            </div>
+            <div style="background: white; padding: 20px; border-radius: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+              <strong style="color: #10b981; display: block; margin-bottom: 5px; font-size: 0.9rem;">IPS Benefits</strong>
+              <p style="font-size: 0.8rem; color: #64748b;">An Intrusion Prevention System (IPS) will flag and block rapid port scans like this one to protect your host.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .port-open { color: #10b981; font-weight: 800; }
+  .port-closed { color: #94a3b8; }
+</style>
+
+<script>
+  const btn = document.getElementById('runBtn');
+  // Ortak servis portları: HTTP, HTTPS, FTP, SSH, SMTP, MySQL, Redis, RDP
+  const commonPorts = [
+    { p: 80, n: "HTTP" }, { p: 443, n: "HTTPS" }, { p: 21, n: "FTP" }, 
+    { p: 22, n: "SSH" }, { p: 25, n: "SMTP" }, { p: 3306, n: "MySQL" }, 
+    { p: 6379, n: "Redis" }, { p: 3389, n: "RDP" }
+  ];
+
+  btn?.addEventListener('click', async () => {
+    let target = (document.getElementById('target') as HTMLInputElement).value.trim();
+    if(!target) return alert("Please enter a target IP or domain.");
+    
+    btn.innerText = "SCANNING PORTS...";
+    btn.disabled = true;
+
+    const grid = document.getElementById('port-grid');
+    const rawPre = document.getElementById('v-raw');
+    grid.innerHTML = '';
+    rawPre.innerText = `[SCAN START]: ${target}\n[TIME]: ${new Date().toLocaleTimeString()}\n--------------------------------\n`;
+
+    document.getElementById('results').style.display = "block";
+
+    for (const portInfo of commonPorts) {
+      const start = Date.now();
+      const card = document.createElement('div');
+      card.style.cssText = "background:white; padding:20px; border-radius:20px; border:1px solid #f1f5f9; text-align:center;";
+      
+      try {
+        // Timing Attack Logic: Hızlı bir fetch/image isteği gönderiyoruz.
+        // Port kapalıysa tarayıcı anında "Connection Refused" der. 
+        // Açıksa yanıt süresi farklı olur.
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 1500);
+
+        await fetch(`https://${target}:${portInfo.p}`, { mode: 'no-cors', signal: controller.signal });
+        clearTimeout(timeoutId);
+        
+        const duration = Date.now() - start;
+        const status = duration < 1000 ? 'OPEN' : 'FILTERED';
+        
+        card.innerHTML = `<span style="font-size:0.7rem; font-weight:800; color:#94a3b8;">PORT ${portInfo.p} (${portInfo.n})</span>
+                          <div class="${status === 'OPEN' ? 'port-open' : 'port-closed'}" style="margin-top:5px; font-size:1.1rem;">${status}</div>`;
+        rawPre.innerText += `Port ${portInfo.p} (${portInfo.n}): ${status} (Response: ${duration}ms)\n`;
+
+      } catch (e) {
+        const duration = Date.now() - start;
+        // Çok kısa sürede (refused) veya çok uzun sürede (timeout) hata vermesine göre durum tayini
+        const status = duration < 50 ? 'CLOSED' : 'FILTERED';
+        card.innerHTML = `<span style="font-size:0.7rem; font-weight:800; color:#94a3b8;">PORT ${portInfo.p} (${portInfo.n})</span>
+                          <div class="port-closed" style="margin-top:5px; font-size:1.1rem;">${status}</div>`;
+        rawPre.innerText += `Port ${portInfo.p} (${portInfo.n}): ${status}\n`;
+      }
+      grid.appendChild(card);
+    }
+
+    rawPre.innerText += `\n--------------------------------\n[SCAN COMPLETE]`;
+    btn.innerText = "START SCAN";
+    btn.disabled = false;
+  });
+</script>

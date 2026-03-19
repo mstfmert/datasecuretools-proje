@@ -1,0 +1,100 @@
+export const prerender = true;
+---
+import Layout from '../../layouts/MainLayout.astro';
+---
+<Layout title="REST API Checker & JSON Tester | DataSecureTools">
+  <div style="max-width: 1200px; margin: 60px auto; padding: 0 20px; font-family: 'Inter', system-ui, sans-serif; display: grid; grid-template-columns: 1fr 320px; gap: 40px; color: #1e293b;">
+    
+    <main>
+      <div style="background: #ffffff; border-radius: 24px; padding: 45px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.05); border: 1px solid #f1f5f9;">
+        <h1 style="color: #0f172a; font-size: 2.2rem; margin-bottom: 12px; font-weight: 800; letter-spacing: -0.025em;">API Checker</h1>
+        <p style="color: #64748b; font-size: 1.1rem; margin-bottom: 40px;">Test REST API endpoints, inspect JSON responses, and monitor latency.</p>
+        
+        <div class="ad-slot" style="margin-bottom: 30px; height: 90px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.8rem;">ADVERTISEMENT SLOT (TOP_BANNER)</div>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 45px; max-width: 700px;">
+          <select id="method" style="padding: 16px; border: 2px solid #e2e8f0; border-radius: 14px; background: #fff; font-weight: 700; color: #0f172a; outline: none;">
+            <option>GET</option>
+            <option>POST</option>
+          </select>
+          <input type="text" id="target" placeholder="https://api.example.com/data" style="flex: 1; padding: 16px 24px; border: 2px solid #e2e8f0; border-radius: 14px; outline: none; font-size: 1.1rem;" />
+          <button id="runBtn" style="padding: 16px 32px; background: #0f172a; color: white; border: none; border-radius: 14px; font-weight: 700; cursor: pointer;">SEND</button>
+        </div>
+
+        <div id="results" style="display: none;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 30px;">
+            <div style="background: #ffffff; padding: 25px; border-radius: 18px; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
+               <span style="font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">Status Code</span>
+               <div id="v-status" style="font-weight: 700; color: #10b981; margin-top: 10px; font-size: 1.3rem;">-</div>
+            </div>
+            <div style="background: #ffffff; padding: 25px; border-radius: 18px; border: 1px solid #f1f5f9; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
+               <span style="font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">Response Time</span>
+               <div id="v-time" style="font-weight: 700; color: #0f172a; margin-top: 10px; font-size: 1.3rem;">-</div>
+            </div>
+          </div>
+
+          <div style="background: #1e293b; padding: 25px; border-radius: 18px; border: 1px solid #334155;">
+             <span style="font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">JSON Response</span>
+             <pre id="v-json" style="margin-top: 15px; font-family: 'Fira Code', monospace; font-size: 14px; line-height: 1.6; color: #38bdf8; white-space: pre-wrap; overflow-x: auto;"></pre>
+          </div>
+          
+          <div class="ad-slot" style="margin-top: 30px; height: 120px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.8rem;">ADVERTISEMENT SLOT (IN_FEED)</div>
+        </div>
+      </div>
+    </main>
+
+    <aside style="display: flex; flex-direction: column; gap: 30px;">
+      <div class="ad-slot" style="height: 250px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 24px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.8rem;">SIDEBAR_AD (300x250)</div>
+
+      <div style="background: #0f172a; color: white; padding: 35px; border-radius: 24px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);">
+        <h3 style="font-size: 1.3rem; margin-bottom: 25px; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px;">Developer Tools</h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 25px;">
+          <div>
+            <a href="/tools/server-headers" style="color: #60a5fa; font-weight: 700; text-decoration: none; font-size: 1.05rem; display: block; margin-bottom: 8px;">Header Inspector</a>
+            <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.6;">Analyze HTTP response headers and security configurations.</p>
+          </div>
+
+          <div>
+            <a href="/tools/random-ip" style="color: #fbbf24; font-weight: 700; text-decoration: none; font-size: 1.05rem; display: block; margin-bottom: 8px;">IP Generator</a>
+            <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.6;">Generate bulk random IP addresses for testing purposes.</p>
+          </div>
+
+          <div>
+            <a href="/tools/speed-test" style="color: #34d399; font-weight: 700; text-decoration: none; font-size: 1.05rem; display: block; margin-bottom: 8px;">Latency Check</a>
+            <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.6;">Measure global server response times and connection stability.</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</Layout>
+
+<script>
+  const btn = document.getElementById('runBtn');
+  btn?.addEventListener('click', async () => {
+    const url = (document.getElementById('target') as HTMLInputElement).value.trim();
+    if(!url) return;
+    
+    btn.innerText = "Connecting...";
+    const startTime = Date.now();
+
+    try {
+      const response = await fetch(url);
+      const endTime = Date.now();
+      const data = await response.json();
+      
+      document.getElementById('v-status').innerText = response.status + " " + response.statusText;
+      document.getElementById('v-time').innerText = (endTime - startTime) + " ms";
+      document.getElementById('v-json').innerText = JSON.stringify(data, null, 4);
+      document.getElementById('results').style.display = "block";
+    } catch (e) {
+      alert("CORS Error: Most public APIs block direct browser requests for security. Try a CORS-friendly endpoint.");
+    } finally {
+      btn.innerText = "SEND";
+    }
+  });
+</script>
+
+

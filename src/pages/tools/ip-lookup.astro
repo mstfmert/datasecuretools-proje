@@ -1,0 +1,100 @@
+﻿---
+import Layout from '../../layouts/MainLayout.astro';
+---
+
+<Layout title="IP Intelligence & Global Lookup | DataSecureTools">
+  <main class="tool-container">
+    <div class="tool-header">
+      <span class="badge">NETWORK INTELLIGENCE</span>
+      <h1>Global IP Lookup</h1>
+      <p>Identify geolocation, ISP, and network ownership data instantly.</p>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="ipInput" placeholder="Enter IP Address (e.g. 8.8.8.8)" />
+      <button id="scanBtn">LOOKUP IP</button>
+    </div>
+
+    <div id="loader" class="hidden">Accessing global database...</div>
+
+    <div id="resultArea" class="result-card hidden">
+      <div class="result-grid">
+        <div class="data-item"><span>Country</span><strong id="res-country">-</strong></div>
+        <div class="data-item"><span>City / Region</span><strong id="res-city">-</strong></div>
+        <div class="data-item"><span>ISP / Org</span><strong id="res-isp">-</strong></div>
+        <div class="data-item"><span>ASN</span><strong id="res-asn">-</strong></div>
+        <div class="data-item"><span>Latitude</span><strong id="res-lat">-</strong></div>
+        <div class="data-item"><span>Longitude</span><strong id="res-lon">-</strong></div>
+      </div>
+    </div>
+  </main>
+
+  <script is:inline>
+    // En stabil ve engellenemeyen veritabanı köprüsü
+    async function performLookup() {
+      const ip = document.getElementById('ipInput').value.trim();
+      const btn = document.getElementById('scanBtn');
+      const resArea = document.getElementById('resultArea');
+      const loader = document.getElementById('loader');
+
+      if (!ip) {
+        alert("Please enter a valid IP address.");
+        return;
+      }
+
+      btn.disabled = true;
+      loader.classList.remove('hidden');
+      resArea.classList.add('hidden');
+
+      try {
+        // Bu API uç noktası Cloudflare ve tarayıcı engellerini aşmak için tasarlanmıştır
+        const response = await fetch(`https://ipwho.is/${ip}`);
+        const data = await response.json();
+
+        if (data.success === false) {
+          throw new Error(data.message || "Invalid IP address");
+        }
+
+        document.getElementById('res-country').innerText = `${data.country} ${data.country_code}`;
+        document.getElementById('res-city').innerText = `${data.city}, ${data.region}`;
+        document.getElementById('res-isp').innerText = data.connection.isp;
+        document.getElementById('res-asn').innerText = `AS${data.connection.asn}`;
+        document.getElementById('res-lat').innerText = data.latitude;
+        document.getElementById('res-lon').innerText = data.longitude;
+
+        resArea.classList.remove('hidden');
+      } catch (err) {
+        console.error("Lookup Error:", err);
+        alert("Network Error: The request was rerouted or blocked. Please try again.");
+      } finally {
+        btn.disabled = false;
+        loader.classList.add('hidden');
+      }
+    }
+
+    document.getElementById('scanBtn').addEventListener('click', performLookup);
+    document.getElementById('ipInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') performLookup();
+    });
+  </script>
+
+  <style>
+    .tool-container { max-width: 800px; margin: 100px auto; padding: 20px; font-family: sans-serif; }
+    .tool-header { text-align: center; margin-bottom: 40px; }
+    .badge { background: #eff6ff; color: #1d4ed8; padding: 5px 12px; border-radius: 6px; font-weight: 700; font-size: 11px; }
+    .tool-header h1 { font-size: 2.5rem; margin: 15px 0; color: #1e293b; }
+    
+    .search-box { display: flex; gap: 10px; background: white; padding: 10px; border-radius: 12px; border: 1px solid #cbd5e1; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .search-box input { flex: 1; border: none; padding: 10px; font-size: 16px; outline: none; }
+    .search-box button { background: #1e293b; color: white; border: none; padding: 0 25px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+
+    #loader { text-align: center; margin-top: 20px; color: #64748b; }
+    .result-card { margin-top: 30px; background: #f8fafc; border-radius: 16px; padding: 25px; border: 1px solid #e2e8f0; }
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .data-item { border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; }
+    .data-item span { font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; }
+    .data-item strong { display: block; font-size: 16px; color: #334155; margin-top: 5px; }
+    .hidden { display: none; }
+    @media (max-width: 600px) { .result-grid { grid-template-columns: 1fr; } }
+  </style>
+</Layout>

@@ -1,0 +1,68 @@
+﻿---
+import Layout from '../../layouts/MainLayout.astro';
+
+// Cloudflare'in her isteğe eklediği ham veriyi alıyoruz
+const cf = Astro.locals.runtime?.cf || {};
+const clientIP = Astro.request.headers.get('cf-connecting-ip') || 'Detected at Edge';
+const isProxy = Astro.request.headers.get('x-forwarded-for')?.split(',').length > 1;
+---
+
+<Layout title="Hide IP Intelligence | DataSecureTools">
+  <main class="tool-container">
+    <div class="tool-header">
+      <span class="badge">SECURE AUDIT</span>
+      <h1>Hide IP Intelligence</h1>
+      <p>Instant privacy audit via Cloudflare Global Edge Network.</p>
+    </div>
+
+    <div class="identity-card">
+        <span class="label">YOUR PUBLIC IDENTITY</span>
+        <h2>{clientIP}</h2>
+    </div>
+
+    <div class="result-card">
+      <div class="status-grid">
+        <div class="status-item">
+            <span>Connection Security</span>
+            <strong style={isProxy ? "color: #dc2626" : "color: #16a34a"}>
+                {isProxy ? "VPN/Proxy Detected" : "Direct Connection (Secure)"}
+            </strong>
+        </div>
+        <div class="status-item">
+            <span>Detection Point</span>
+            <strong>{cf.colo || 'Global Node'} ({cf.city || 'Edge'})</strong>
+        </div>
+        <div class="status-item">
+            <span>Country</span>
+            <strong>{cf.country || 'International'}</strong>
+        </div>
+        <div class="status-item">
+            <span>Network ASN</span>
+            <strong>AS{cf.asn || '0000'}</strong>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-note">ℹ️ Verified by Cloudflare Intelligent Routing. No third-party API calls made.</p>
+  </main>
+</Layout>
+
+<style>
+  .tool-container { max-width: 800px; margin: 100px auto; padding: 20px; font-family: 'Inter', sans-serif; }
+  .tool-header { text-align: center; margin-bottom: 40px; }
+  .badge { background: #dcfce7; color: #15803d; padding: 6px 12px; border-radius: 8px; font-weight: 800; font-size: 11px; }
+  .tool-header h1 { font-size: 3rem; font-weight: 900; color: #0f172a; margin-top: 15px; }
+  
+  .identity-card { background: #0f172a; border-radius: 24px; padding: 50px; text-align: center; margin-bottom: 30px; color: white; }
+  .label { font-size: 14px; font-weight: 700; color: #94a3b8; letter-spacing: 2px; }
+  h2 { font-size: 3.5rem; font-weight: 900; margin: 20px 0; color: #fff; word-break: break-all; }
+  
+  .result-card { background: white; border-radius: 20px; padding: 30px; border: 1px solid #e2e8f0; }
+  .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .status-item { border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; }
+  .status-item span { font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; }
+  .status-item strong { display: block; font-size: 18px; color: #1e293b; margin-top: 5px; }
+  .footer-note { text-align: center; margin-top: 20px; color: #94a3b8; font-size: 12px; }
+
+  @media (max-width: 600px) { h2 { font-size: 2rem; } .status-grid { grid-template-columns: 1fr; } }
+</style>

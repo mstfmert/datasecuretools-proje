@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/MainLayout.astro';
+export const prerender = true;
+---
+<Layout title="Advanced Browser Fingerprint Auditor | Digital Identity Test | DataSecureTools">
+  <div style="max-width: 1200px; margin: 40px auto; padding: 0 20px; font-family: 'Inter', sans-serif; color: #0f172a;">
+    
+    <div style="width: 100%; height: 90px; background: #ffffff; border: 1px dashed #cbd5e1; border-radius: 12px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.8rem; letter-spacing: 1px;">
+      ADVERTISEMENT - GOOGLE ADSENSE
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 340px; gap: 40px; align-items: start;">
+      
+      <main>
+        <div style="background: #ffffff; border-radius: 40px; padding: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); border: 1px solid #f1f5f9;">
+          <header style="margin-bottom: 40px;">
+            <span style="background: #f1f5f9; color: #475569; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Identity Tracking</span>
+            <h1 style="font-size: 3rem; font-weight: 900; margin-top: 15px; letter-spacing: -1.5px; color: #0f172a;">Fingerprint Auditor</h1>
+            <p style="color: #64748b; font-size: 1.15rem; margin-top: 15px; line-height: 1.6;">Analyze your browser's unique digital signature used by trackers to identify you without cookies.</p>
+          </header>
+
+          <div style="background: #f8fafc; padding: 30px; border-radius: 24px; border: 1px solid #e2e8f0; text-align: center; margin-bottom: 35px;">
+            <button id="runBtn" style="background: #0f172a; color: white; padding: 18px 50px; border-radius: 18px; border: none; font-weight: 800; font-size: 1rem; cursor: pointer; transition: 0.3s; text-transform: uppercase;">GENERATE FINGERPRINT</button>
+          </div>
+
+          <div id="results" style="display: none; animation: slideUp 0.6s ease-out;">
+              <div style="background: #f8fafc; padding: 25px; border-radius: 20px; border: 1px solid #e2e8f0; margin-bottom: 30px; text-align: center;">
+                  <span style="font-size: 0.75rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Your Unique Device ID</span>
+                  <div id="v-hash" style="font-family: 'Fira Code', monospace; font-size: 1.4rem; font-weight: 900; color: #4f46e5; margin-top: 10px; word-break: break-all;">-</div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                  <div style="background: #ffffff; padding: 30px; border-radius: 24px; border: 1px solid #f1f5f9; text-align: center;">
+                      <span style="font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Entropy Level</span>
+                      <div id="v-entropy" style="font-size: 1.8rem; font-weight: 900; color: #ef4444; margin-top: 8px;">HIGH</div>
+                  </div>
+                  <div style="background: #ffffff; padding: 30px; border-radius: 24px; border: 1px solid #f1f5f9; text-align: center;">
+                      <span style="font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Canvas Integrity</span>
+                      <div id="v-canvas" style="font-size: 1.8rem; font-weight: 900; color: #0f172a; margin-top: 8px;">UNIQUE</div>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 60px;">
+            <h2 style="font-size: 1.8rem; font-weight: 900; color: #0f172a; margin-bottom: 25px; letter-spacing: -0.5px;">The Evolution of Browser Fingerprinting</h2>
+            <p style="color: #475569; line-height: 1.8; font-size: 1.05rem; margin-bottom: 40px;">Unlike cookies, a <strong>Browser Fingerprint</strong> is a passive tracking technique that collects information about your hardware and software environment. By combining data such as screen resolution, installed fonts, and <strong>Canvas rendering</strong>, websites can create a signature that remains consistent even in incognito mode. Our <strong>Fingerprint Auditor</strong> helps you visualize the data points that make your device stand out in a global pool of millions.</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px;">
+                <div>
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 15px;">Canvas & WebGL Signals</h3>
+                    <p style="font-size: 0.95rem; color: #64748b; line-height: 1.7;">By rendering invisible graphics, trackers can detect subtle differences in how your GPU handles anti-aliasing and pixel geometry, creating a reliable hardware ID.</p>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-bottom: 15px;">Font & Plugin Entropy</h3>
+                    <p style="font-size: 0.95rem; color: #64748b; line-height: 1.7;">The specific set of fonts installed on your OS provides significant entropy. The more unique your setup, the easier it is for tracking scripts to re-identify you.</p>
+                </div>
+            </div>
+        </div>
+      </main>
+
+      <aside>
+        <div style="width: 100%; height: 600px; background: #ffffff; border: 1px dashed #cbd5e1; border-radius: 24px; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.8rem; text-align: center; padding: 20px;">
+          ADSENSE SKYSCRAPER
+        </div>
+
+        <div style="background: #f8fafc; border-radius: 32px; padding: 30px; border: 1px solid #f1f5f9;">
+            <h3 style="font-size: 1rem; font-weight: 900; color: #0f172a; margin-bottom: 25px;">Strategic Advice</h3>
+            <div style="background: #ffffff; padding: 25px; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.01); margin-bottom: 20px; border: 1px solid #f1f5f9;">
+                <strong style="color: #4f46e5; display: block; margin-bottom: 10px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase;">Spoofing Tools</strong>
+                <p style="font-size: 0.8rem; color: #64748b; line-height: 1.6;">Use privacy-focused browsers or extensions that inject noise into Canvas and Audio API calls to randomize your ID.</p>
+            </div>
+            <div style="background: #ffffff; padding: 25px; border-radius: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.01); border: 1px solid #f1f5f9;">
+                <strong style="color: #10b981; display: block; margin-bottom: 10px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase;">Resist Fingerprinting</strong>
+                <p style="font-size: 0.8rem; color: #64748b; line-height: 1.6;">Enable 'Resist Fingerprinting' in advanced browser settings to report standard hardware values to all websites.</p>
+            </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<script>
+  const btn = document.getElementById('runBtn');
+  
+  async function generateFingerprint() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.textBaseline = "top";
+    ctx.font = "14px 'Arial'";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = "#f60";
+    ctx.fillRect(125,1,62,20);
+    ctx.fillStyle = "#069";
+    ctx.fillText("DataSecureTools <3", 2, 15);
+    ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
+    ctx.fillText("DataSecureTools <3", 4, 17);
+    const result = canvas.toDataURL();
+    
+    // Hash function
+    let hash = 0;
+    for (let i = 0; i < result.length; i++) {
+        hash = ((hash << 5) - hash) + result.charCodeAt(i);
+        hash |= 0;
+    }
+    return Math.abs(hash).toString(16).toUpperCase();
+  }
+
+  btn?.addEventListener('click', async () => {
+    btn.innerText = "CALCULATING ENTROPY...";
+    btn.disabled = true;
+
+    const hash = await generateFingerprint();
+    
+    setTimeout(() => {
+        document.getElementById('v-hash').innerText = "ID-" + hash;
+        document.getElementById('results').style.display = "block";
+        btn.innerText = "GENERATE FINGERPRINT";
+        btn.disabled = false;
+    }, 1000);
+  });
+</script>

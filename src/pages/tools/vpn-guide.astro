@@ -1,0 +1,136 @@
+---
+import Layout from '../../layouts/MainLayout.astro';
+export const prerender = true;
+---
+<Layout title="VPN Protocol Battle & Security Simulator | DataSecureTools">
+  <div style="max-width: 1300px; margin: 40px auto; padding: 0 20px; font-family: 'Inter', sans-serif; color: #0f172a;">
+    
+    <div style="width: 100%; height: 90px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.8rem;">
+      ADVERTISEMENT - HIGH CPC VPN ADS
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 340px; gap: 40px;">
+      <main>
+        <div style="background: #ffffff; border-radius: 32px; padding: 50px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.03); border: 1px solid #f1f5f9;">
+          <header style="margin-bottom: 40px;">
+            <span style="background: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 100px; font-size: 0.85rem; font-weight: 700;">ENCRYPTION BATTLE</span>
+            <h1 style="font-size: 2.8rem; font-weight: 900; margin-top: 15px; letter-spacing: -1px;">Protocol Simulator</h1>
+            <p style="color: #64748b; font-size: 1.2rem; margin-top: 10px;">Compare top VPN protocols against real-world scenarios and audit your tunnel safety.</p>
+          </header>
+
+          <div style="background: #0f172a; border-radius: 28px; padding: 40px; margin-bottom: 50px; border: 1px solid #334155;">
+             <h3 style="color: white; margin-bottom: 25px; font-size: 1.3rem;">🚀 Scenario Simulator</h3>
+             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px;">
+                <button class="scene-btn" data-scene="gaming" style="padding: 15px; border-radius: 15px; border: 1px solid #334155; background: #1e293b; color: white; cursor: pointer; font-weight: 700; transition: 0.3s;">Low Latency (Gaming)</button>
+                <button class="scene-btn" data-scene="privacy" style="padding: 15px; border-radius: 15px; border: 1px solid #334155; background: #1e293b; color: white; cursor: pointer; font-weight: 700; transition: 0.3s;">Max Privacy (DarkWeb)</button>
+                <button class="scene-btn" data-scene="streaming" style="padding: 15px; border-radius: 15px; border: 1px solid #334155; background: #1e293b; color: white; cursor: pointer; font-weight: 700; transition: 0.3s;">High Speed (4K)</button>
+             </div>
+
+             <div id="battle-results" style="background: rgba(255,255,255,0.03); border-radius: 20px; padding: 30px; border: 1px dashed #334155; display: none;">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div id="v-winner-icon" style="font-size: 3rem;">🛡️</div>
+                    <div>
+                        <div style="color: #38bdf8; font-size: 0.8rem; font-weight: 800; text-transform: uppercase;">Recommended Protocol</div>
+                        <div id="v-winner-name" style="color: white; font-size: 1.8rem; font-weight: 900;">-</div>
+                    </div>
+                </div>
+                <div id="v-winner-desc" style="color: #94a3b8; margin-top: 15px; font-size: 0.95rem; line-height: 1.6;"></div>
+             </div>
+          </div>
+
+          <div style="background: #f8fafc; border-radius: 24px; padding: 30px; border: 1px solid #e2e8f0; margin-bottom: 40px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="font-size: 1.1rem; font-weight: 800;">Current Connection Status</h3>
+                <span id="v-status-dot" style="padding: 6px 15px; border-radius: 100px; font-size: 0.75rem; font-weight: 900; background: #fee2e2; color: #ef4444;">UNPROTECTED</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div style="background: white; padding: 20px; border-radius: 16px; border: 1px solid #f1f5f9;">
+                    <span style="font-size: 0.7rem; color: #94a3b8; font-weight: 800; text-transform: uppercase;">Public IP</span>
+                    <div id="v-ip" style="font-weight: 800; color: #0f172a; margin-top: 5px;">Detecting...</div>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 16px; border: 1px solid #f1f5f9;">
+                    <span style="font-size: 0.7rem; color: #94a3b8; font-weight: 800; text-transform: uppercase;">Infrastructure</span>
+                    <div id="v-isp" style="font-weight: 800; color: #0369a1; margin-top: 5px;">Detecting...</div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <article style="margin-top: 60px; line-height: 1.8; color: #475569;">
+          <h2 style="color: #0f172a; font-size: 1.8rem; font-weight: 800;">Battle of Protocols: WireGuard vs OpenVPN</h2>
+          <p style="margin-top: 20px;">In the landscape of 2026, the <strong>VPN Protocol Battle</strong> is dominated by two giants. <strong>WireGuard</strong> has revolutionized the industry with its lean code and state-of-the-art cryptography, making it the king of 4K streaming and low-latency gaming. On the other hand, <strong>OpenVPN</strong> remains the fortress of choice for political activists and high-security enterprises due to its extreme obfuscation capabilities. Our <strong>VPN Simulator</strong> helps you audit which encryption layer best suits your threat model.</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+            <div>
+              <h3 style="color: #0f172a; font-size: 1.2rem; font-weight: 700;">ChaCha20 vs AES-256</h3>
+              <p style="font-size: 0.9rem;">Modern mobile devices perform significantly faster with ChaCha20 encryption (WireGuard), while desktop CPUs with AES-NI instructions handle AES-256 (OpenVPN) with ease.</p>
+            </div>
+            <div>
+              <h3 style="color: #0f172a; font-size: 1.2rem; font-weight: 700;">Obfuscated Tunnels</h3>
+              <p style="font-size: 0.9rem;">To bypass deep packet inspection (DPI) in restricted regions, OpenVPN's ability to run over TCP port 443 makes it virtually invisible to firewalls.</p>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <aside>
+        <div style="width: 100%; height: 600px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 24px; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
+          ADSENSE SKYSCRAPER
+        </div>
+
+        <div style="background: #f0f9ff; padding: 30px; border-radius: 32px;">
+          <h3 style="font-size: 1.1rem; font-weight: 900; color: #0f172a; margin-bottom: 25px;">Tunnel Advice</h3>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="background: white; padding: 20px; border-radius: 18px;">
+              <strong style="color: #0369a1; display: block; margin-bottom: 5px; font-size: 0.9rem;">DNS Leak Protection</strong>
+              <p style="font-size: 0.8rem; color: #64748b;">Even with a VPN, your browser might send DNS queries to your ISP. Always use 'DNS over HTTPS' to seal the leak.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const sceneBtns = document.querySelectorAll('.scene-btn');
+  const battleBox = document.getElementById('battle-results');
+  const winnerName = document.getElementById('v-winner-name');
+  const winnerDesc = document.getElementById('v-winner-desc');
+  const winnerIcon = document.getElementById('v-winner-icon');
+
+  const scenarios = {
+    gaming: { n: 'WireGuard', i: '⚡', d: 'With only 4,000 lines of code, WireGuard offers the lowest latency and fastest reconnection times, perfect for competitive gaming.' },
+    privacy: { n: 'OpenVPN (TCP)', i: '🏰', d: 'The gold standard for anonymity. Supports various ciphers and can be heavily obfuscated to hide VPN traffic from ISP monitors.' },
+    streaming: { n: 'IKEv2 / IPsec', i: '📺', d: 'Excellent at maintaining high throughput and switching between Wi-Fi and mobile data without dropping the 4K stream.' }
+  };
+
+  sceneBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sceneBtns.forEach(b => b.style.borderColor = "#334155");
+      btn.style.borderColor = "#38bdf8";
+      
+      const s = scenarios[btn.dataset.scene];
+      winnerName.innerText = s.n;
+      winnerDesc.innerText = s.d;
+      winnerIcon.innerText = s.i;
+      battleBox.style.display = 'block';
+    });
+  });
+
+  async function performAudit() {
+    try {
+      const response = await fetch('http://ip-api.com/json/?fields=status,isp,query,proxy,hosting');
+      const data = await response.json();
+      document.getElementById('v-ip').innerText = data.query;
+      document.getElementById('v-isp').innerText = data.isp;
+      
+      if(data.proxy || data.hosting) {
+        const dot = document.getElementById('v-status-dot');
+        dot.innerText = 'PROTECTED (VPN/PROXY)';
+        dot.style.background = '#ecfdf5';
+        dot.style.color = '#10b981';
+      }
+    } catch (e) { }
+  }
+  performAudit();
+</script>

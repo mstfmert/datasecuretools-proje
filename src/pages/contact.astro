@@ -1,0 +1,123 @@
+﻿---
+import Layout from '../layouts/MainLayout.astro';
+---
+
+<Layout title="İletişim | DataSecureTools">
+  <main class="contact-container">
+    <header class="contact-header">
+      <span class="support-badge">7/24 Teknik Destek</span>
+      <h1>Bizimle İletişime Geçin</h1>
+      <p>Sorularınız, önerileriniz veya teknik destek talepleriniz için uzman ekibimiz burada.</p>
+    </header>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="info-card">
+          <h3>Hızlı Destek Hattı</h3>
+          <p>En hızlı geri dönüşü WhatsApp üzerinden alabilirsiniz. Teknik ekibimiz mesai saatleri içerisinde aktif destek sunmaktadır.</p>
+          <a href="https://wa.me/905324484625" target="_blank" class="whatsapp-btn">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp ile Başlat
+          </a>
+        </div>
+
+        <div class="contact-details">
+          <div class="detail-item">
+            <strong>E-Posta</strong>
+            <p>support@datasecuretools.com</p>
+          </div>
+          <div class="detail-item">
+            <strong>Konum</strong>
+            <p>Global Intelligence Hub / Remote</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrapper">
+        <form class="contact-form">
+          <div class="form-group">
+            <label>Adınız Soyadınız</label>
+            <input type="text" placeholder="Mert Demir" required />
+          </div>
+          <div class="form-group">
+            <label>E-Posta Adresiniz</label>
+            <input type="email" placeholder="mert@örnek.com" required />
+          </div>
+          <div class="form-group">
+            <label>Mesajınız</label>
+            <textarea rows="5" placeholder="Size nasıl yardımcı olabiliriz?" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Mesajı Gönder</button>
+        </form>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .contact-container { max-width: 1100px; margin: 80px auto; padding: 0 20px; font-family: 'Inter', sans-serif; }
+  .contact-header { text-align: center; margin-bottom: 60px; }
+  .support-badge { background: #eef2ff; color: #4f46e5; padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+  .contact-header h1 { font-size: 3.5rem; font-weight: 900; color: #0f172a; margin: 20px 0 10px; letter-spacing: -2px; }
+  .contact-header p { color: #64748b; font-size: 1.1rem; }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
+  
+  .info-card { background: #f8fafc; padding: 40px; border-radius: 32px; border: 1px solid #f1f5f9; margin-bottom: 30px; }
+  .info-card h3 { font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 15px; }
+  .info-card p { color: #475569; line-height: 1.7; margin-bottom: 25px; }
+  
+  .whatsapp-btn { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 12px; 
+    background: #25D366; 
+    color: white; 
+    padding: 16px 32px; 
+    border-radius: 16px; 
+    text-decoration: none; 
+    font-weight: 800; 
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 10px 15px -3px rgba(37, 211, 102, 0.2);
+  }
+  .whatsapp-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(37, 211, 102, 0.3); }
+
+  .contact-details { padding: 0 20px; }
+  .detail-item { margin-bottom: 25px; }
+  .detail-item strong { display: block; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; margin-bottom: 5px; }
+  .detail-item p { color: #0f172a; font-weight: 700; font-size: 1.1rem; }
+
+  .contact-form-wrapper { background: #ffffff; padding: 40px; border-radius: 32px; border: 1px solid #f1f5f9; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.03); }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 0.85rem; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+  .form-group input, .form-group textarea { 
+    width: 100%; 
+    padding: 15px; 
+    border-radius: 12px; 
+    border: 1px solid #e2e8f0; 
+    font-family: inherit; 
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: #4f46e5; }
+  
+  .submit-btn { 
+    width: 100%; 
+    background: #0f172a; 
+    color: white; 
+    padding: 18px; 
+    border-radius: 14px; 
+    border: none; 
+    font-weight: 800; 
+    font-size: 1rem; 
+    cursor: pointer; 
+    transition: background 0.2s; 
+  }
+  .submit-btn:hover { background: #1e293b; }
+
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-header h1 { font-size: 2.5rem; }
+  }
+</style>

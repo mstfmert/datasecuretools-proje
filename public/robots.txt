@@ -1,0 +1,4 @@
+﻿User-agent: *
+Allow: /
+
+Sitemap: https://datasecuretools.pro/sitemap-index.xml

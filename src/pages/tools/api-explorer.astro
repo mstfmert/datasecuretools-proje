@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/MainLayout.astro';
+export const prerender = true;
+---
+<Layout title="Public API Explorer | Discover Open-Source API Endpoints | DataSecureTools">
+  <div style="max-width: 1300px; margin: 40px auto; padding: 0 20px; font-family: 'Inter', sans-serif; color: #0f172a;">
+    
+    <div style="width: 100%; height: 90px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.8rem;">
+      ADVERTISEMENT - GOOGLE ADSENSE
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 340px; gap: 40px;">
+      <main>
+        <div style="background: #ffffff; border-radius: 32px; padding: 50px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.03); border: 1px solid #f1f5f9;">
+          <header style="margin-bottom: 40px;">
+            <span style="background: #fdf2f8; color: #db2777; padding: 6px 14px; border-radius: 100px; font-size: 0.85rem; font-weight: 700;">DEVELOPER INTEL</span>
+            <h1 style="font-size: 2.8rem; font-weight: 900; margin-top: 15px; letter-spacing: -1px;">Public API Explorer</h1>
+            <p style="color: #64748b; font-size: 1.2rem; margin-top: 10px;">Discover and audit thousands of free, public API endpoints for your next project.</p>
+          </header>
+
+          <div style="background: #f8fafc; padding: 8px; border-radius: 20px; display: flex; border: 1px solid #e2e8f0; margin-bottom: 35px;">
+            <input type="text" id="target" placeholder="Search by category or keyword (e.g. security, weather, crypto)" style="flex: 1; padding: 18px 25px; border: none; background: transparent; outline: none; font-size: 1.1rem;" />
+            <button id="runBtn" style="background: #0f172a; color: white; padding: 0 35px; border-radius: 14px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s;">FIND API</button>
+          </div>
+
+          <div id="results" style="display: none; animation: slideUp 0.6s ease-out;">
+            <div id="api-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                </div>
+
+            <div style="background: #0f172a; border-radius: 24px; padding: 40px; border: 1px solid #334155;">
+              <span style="color: #64748b; font-size: 0.75rem; font-weight: 800; text-transform: uppercase;">Real-Time API Registry Metadata</span>
+              <pre id="v-raw" style="font-family: 'Fira Code', monospace; color: #38bdf8; font-size: 0.9rem; margin-top: 20px; line-height: 1.6; white-space: pre-wrap;"></pre>
+            </div>
+          </div>
+        </div>
+
+        <article style="margin-top: 60px; line-height: 1.8; color: #475569;">
+          <h2 style="color: #0f172a; font-size: 1.8rem; font-weight: 800;">Leveraging Public APIs for Rapid Development</h2>
+          <p style="margin-top: 20px;">The modern web is built on interconnected services. A <strong>Public API</strong> allows your application to tap into vast datasets without the need to manage the underlying infrastructure. Our <strong>API Discovery Tool</strong> helps you audit and find endpoints that support <strong>CORS</strong>, <strong>HTTPS</strong>, and various authentication methods, ensuring your tech stack remains secure and efficient.</p>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+            <div>
+              <h3 style="color: #0f172a; font-size: 1.2rem; font-weight: 700;">Integration Security</h3>
+              <p style="font-size: 0.9rem;">Before integrating an endpoint, always check if it supports <strong>OAuth</strong> or <strong>API Keys</strong> to protect your user data from unauthorized access.</p>
+            </div>
+            <div>
+              <h3 style="color: #0f172a; font-size: 1.2rem; font-weight: 700;">Endpoint Audit</h3>
+              <p style="font-size: 0.9rem;">Verify the uptime and response type (JSON/XML) of open-source APIs to maintain the reliability of your production environment.</p>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <aside>
+        <div style="width: 100%; height: 600px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 24px; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
+          ADSENSE SKYSCRAPER
+        </div>
+
+        <div style="background: #fdf2f8; padding: 30px; border-radius: 32px;">
+          <h3 style="font-size: 1.1rem; font-weight: 900; color: #0f172a; margin-bottom: 25px;">Dev Strategy</h3>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="background: white; padding: 20px; border-radius: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+              <strong style="color: #db2777; display: block; margin-bottom: 5px; font-size: 0.9rem;">Rate Limiting</strong>
+              <p style="font-size: 0.8rem; color: #64748b;">Public APIs often have strict rate limits. Implement caching to avoid getting your IP blacklisted.</p>
+            </div>
+            <div style="background: white; padding: 20px; border-radius: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+              <strong style="color: #3b82f6; display: block; margin-bottom: 5px; font-size: 0.9rem;">JSONP & CORS</strong>
+              <p style="font-size: 0.8rem; color: #64748b;">If you're calling an API from the browser, ensure it supports CORS to avoid "Access-Control-Allow-Origin" errors.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style> @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } } </style>
+
+<script>
+  const btn = document.getElementById('runBtn');
+  btn?.addEventListener('click', async () => {
+    const query = (document.getElementById('target') as HTMLInputElement).value.trim();
+    
+    btn.innerText = "EXPLORING ENDPOINTS...";
+    btn.disabled = true;
+
+    try {
+      // Motor: Public APIs Index (GitHub-based Real-time Database)
+      const response = await fetch(`https://api.publicapis.org/entries?title=${query}`);
+      const data = await response.json();
+
+      const grid = document.getElementById('api-grid');
+      const rawPre = document.getElementById('v-raw');
+      grid.innerHTML = '';
+
+      if (data.count === 0) {
+        grid.innerHTML = '<div style="color:#64748b;">No APIs found for this keyword.</div>';
+      } else {
+        // İlk 12 sonucu göster (Hız için)
+        data.entries.slice(0, 12).forEach(api => {
+          const card = document.createElement('div');
+          card.style.cssText = "background:white; padding:25px; border-radius:24px; border:1px solid #f1f5f9; transition:0.3s; cursor:pointer;";
+          card.innerHTML = `
+            <span style="font-size:0.7rem; font-weight:800; color:#db2777; text-transform:uppercase;">${api.Category}</span>
+            <div style="font-weight:800; color:#0f172a; font-size:1.1rem; margin-top:5px;">${api.API}</div>
+            <p style="font-size:0.8rem; color:#64748b; margin-top:10px;">${api.Description}</p>
+            <div style="margin-top:15px; display:flex; gap:10px;">
+               <span style="font-size:0.65rem; background:#f1f5f9; padding:4px 8px; border-radius:6px; font-weight:700;">AUTH: ${api.Auth || 'None'}</span>
+               <span style="font-size:0.65rem; background:#ecfdf5; color:#10b981; padding:4px 8px; border-radius:6px; font-weight:700;">HTTPS: ${api.HTTPS}</span>
+            </div>
+            <a href="${api.Link}" target="_blank" style="display:inline-block; margin-top:15px; font-size:0.85rem; font-weight:700; color:#3b82f6; text-decoration:none;">Docs &rarr;</a>
+          `;
+          grid.appendChild(card);
+        });
+      }
+
+      rawPre.innerText = `[INDEXED]: ${data.count} results found\n[TIMESTAMP]: ${new Date().toISOString()}\n[ENGINE]: Public APIs Global Registry\n--------------------------------\n` + JSON.stringify(data.entries.slice(0,3), null, 4);
+      document.getElementById('results').style.display = "block";
+      
+    } catch (e) {
+      alert("Registry Error: The global API database is currently undergoing maintenance.");
+    } finally {
+      btn.innerText = "FIND API";
+      btn.disabled = false;
+    }
+  });
+</script>

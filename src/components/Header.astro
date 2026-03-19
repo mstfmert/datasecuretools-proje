@@ -1,0 +1,182 @@
+﻿---
+// Header.astro - DataSecureTools | Pro Suite
+---
+<header class="main-header">
+  <div class="header-container">
+    <a href="/" class="logo">
+      DataSecureTools <span class="pro-badge">| Pro Suite</span>
+    </a>
+
+    <nav class="main-nav">
+      <ul class="nav-list">
+        <li><a href="/" class="nav-item">Home</a></li>
+
+        <li class="dropdown">
+          <div class="drop-trigger">
+            <span class="nav-item">IP Tools</span>
+          </div>
+          <div class="dropdown-content">
+            <a href="/tools/ip-lookup">IP Address Lookup</a>
+            <a href="/tools/ip-whois">IP WHOIS Lookup</a>
+            <a href="/tools/asn-lookup">ASN Lookup</a>
+            <a href="/tools/hostname-lookup">Hostname Lookup</a>
+            <div class="divider">DNS & Network</div>
+            <a href="/tools/speed-test">Speed Test</a>
+            <a href="/tools/dns-lookup">DNS Lookup</a>
+            <a href="/tools/reverse-dns">Reverse DNS Lookup</a>
+            <a href="/tools/port-scanner">Port Scanner</a>
+            <a href="/tools/subnet-calc">Subnet Calculator</a>
+            <a href="/tools/cidr-calc">CIDR Calculator</a>
+            <div class="divider">Utilities & API</div>
+            <a href="/tools/random-ip">Random IP Generator</a>
+            <a href="/tools/server-headers">Server Headers Check</a>
+            <a href="/tools/api">API</a>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <div class="drop-trigger">
+            <span class="nav-item">Security Tools</span>
+          </div>
+          <div class="dropdown-content">
+            <a href="/tools/iac-auditor">IaC Config Auditor</a>
+            <a href="/tools/compliance-auditor">Compliance Auditor</a>
+            <a href="/tools/security-auditor">Security Auditor</a>
+            <a href="/tools/password-strength">Password Strength</a>
+            <a href="/tools/domain-trust">Domain Trust Checker</a>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <div class="drop-trigger">
+            <span class="nav-item">SEO Tools</span>
+          </div>
+          <div class="dropdown-content">
+            <a href="/tools/seo-analyzer">SEO Analyzer</a>
+            <a href="/tools/speed-analyzer">Speed Analyzer</a>
+            <a href="/tools/image-optimizer">Image Optimizer</a>
+            <a href="/tools/browser-emulator">Browser Emulator</a>
+            <a href="/tools/robots-txt">Robots.txt Gen</a>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <span class="nav-item">Privacy Tools</span>
+          <div class="dropdown-content">
+            <a href="/tools/hide-ip">Hide My IP Address</a>
+            <a href="/tools/vpn-guide">VPN Guide</a>
+            <a href="/tools/proxy-check">Proxy Check</a>
+            <a href="/tools/vpn-leak-test">VPN Leak Test</a>
+            <a href="/tools/browser-fingerprint">Browser Fingerprint</a>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <div class="drop-trigger">
+            <span class="nav-item">Data Tools</span>
+          </div>
+          <div class="dropdown-content right-align">
+            <a href="/tools/web-scraper">Web Scraper & Intel</a>
+            <a href="/tools/tech-stack-spy">Tech Stack Spy</a>
+            <a href="/tools/site-value">Site Value Predictor</a>
+            <a href="/tools/link-finder">Link Finder</a>
+            <a href="/tools/api-latency">API Latency Tester</a>
+          </div>
+        </li>
+
+        <li><a href="/blog" class="blog-highlight">Blog</a></li>
+      </ul>
+    </nav>
+
+    <a href="https://github.com" class="github-btn" target="_blank">GitHub</a>
+  </div>
+</header>
+
+<style>
+  .main-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    font-family: 'Inter', system-ui, sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+  }
+  
+  .header-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .logo { font-size: 22px; font-weight: 800; color: #000; text-decoration: none; letter-spacing: -0.5px; }
+  .pro-badge { color: #9ca3af; font-weight: 500; font-size: 18px; }
+
+  .nav-list { list-style: none; display: flex; margin: 0; padding: 0; gap: 10px; align-items: center; }
+
+  .dropdown { position: relative; padding: 10px 0; }
+  
+  .nav-item {
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+
+  .dropdown:hover .nav-item { color: #2563eb; background: #f3f4f6; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 250px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    z-index: 9999;
+  }
+
+  .dropdown:hover .dropdown-content { display: block; }
+
+  .dropdown-content a {
+    color: #374151;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s;
+  }
+
+  .dropdown-content a:hover { background: #eff6ff; color: #1d4ed8; }
+
+  /* BLOG ÖZEL (Daha Koyu Vurgu) */
+  .blog-highlight {
+    background: #dbeafe; /* Bir ton daha koyu mavi arka plan */
+    color: #1e40af !important; /* Daha derin kurumsal mavi yazı */
+    padding: 8px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 800; /* Daha kalın font */
+    margin-left: 5px;
+    transition: 0.2s;
+    border: 1px solid #bfdbfe;
+  }
+  .blog-highlight:hover { background: #bfdbfe; border-color: #60a5fa; }
+
+  .divider { padding: 12px 20px 5px; font-size: 11px; font-weight: 800; color: #9ca3af; text-transform: uppercase; }
+  .github-btn { background: #111827; color: #fff; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 600; }
+  
+  .right-align { left: auto; right: 0; }
+</style>

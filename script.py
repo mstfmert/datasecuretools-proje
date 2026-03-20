@@ -1,4 +1,4 @@
-﻿import os
+import os
 import requests
 from datetime import datetime
 
@@ -82,3 +82,4 @@ def generate_automated_blog():
 
 if __name__ == "__main__":
     generate_automated_blog()
+    

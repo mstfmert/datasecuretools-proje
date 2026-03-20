@@ -1,29 +1,39 @@
 ---
 import Layout from '../../layouts/MainLayout.astro';
-import { getCollection, render } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
-export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map(post => ({
-    params: { slug: post.id },
-    props: { post },
-  }));
+// 1. URL'den slug parametresini alıyoruz
+const { slug } = Astro.params;
+
+// 2. Slug verisi yoksa veya yanlışsa koruma kalkanı
+if (!slug) {
+  return Astro.redirect('/404');
 }
 
-const { post } = Astro.props;
-// Astro v5'in yeni render metodu
+// 3. İçeriği koleksiyondan direkt çekiyoruz (SSR modu için en sağlıklısı)
+const post = await getEntry('blog', slug);
+
+// 4. Eğer makale bulunamazsa 500 hatası yerine 404'e yönlendiriyoruz
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+// 5. Astro v5'in yeni render fonksiyonu
 const { Content } = await render(post);
 ---
+
 <Layout title={post.data.title}>
   <article style="max-width: 850px; margin: 60px auto; padding: 0 25px; font-family: 'Inter', sans-serif;">
     <header style="margin-bottom: 50px; text-align: center;">
       <div style="background: #f1f5f9; display: inline-block; padding: 6px 15px; border-radius: 100px; color: #4f46e5; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 20px;">
-        {post.data.pubDate.toLocaleDateString()}
+        {post.data.pubDate.toLocaleDateString('tr-TR')}
       </div>
       <h1 style="font-size: 3.5rem; font-weight: 900; color: #0f172a; line-height: 1.1; letter-spacing: -2px; margin-bottom: 20px;">
         {post.data.title}
       </h1>
-      <p style="color: #64748b; font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">{post.data.description}</p>
+      <p style="color: #64748b; font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+        {post.data.description}
+      </p>
     </header>
 
     <hr style="border: 0; border-top: 1px solid #f1f5f9; margin-bottom: 50px;" />
@@ -35,11 +45,13 @@ const { Content } = await render(post);
 </Layout>
 
 <style is:global>
+  /* Makale içeriğinin şık görünmesi için Tailwind benzeri tipografi ayarları */
   .prose { line-height: 1.8; color: #334155; font-size: 1.15rem; }
   .prose h2 { color: #0f172a; font-size: 2rem; font-weight: 800; margin-top: 50px; margin-bottom: 20px; letter-spacing: -0.5px; }
   .prose h3 { color: #0f172a; font-size: 1.5rem; font-weight: 800; margin-top: 30px; margin-bottom: 15px; }
   .prose p { margin-bottom: 25px; }
   .prose strong { color: #0f172a; font-weight: 700; }
-  .prose ul { margin-bottom: 25px; padding-left: 20px; }
+  .prose ul { margin-bottom: 25px; padding-left: 20px; list-style-type: disc; }
   .prose li { margin-bottom: 10px; }
+  .prose code { background: #f1f5f9; padding: 2px 5px; border-radius: 4px; font-size: 0.9em; }
 </style>

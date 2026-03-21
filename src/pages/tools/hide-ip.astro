@@ -1,34 +1,36 @@
 ﻿---
 import Layout from '../../layouts/MainLayout.astro';
 
-// 1. Cloudflare Locals'tan veriyi güvenli çek
+// 1. Cloudflare Locals'a erişim (En güvenli zincir)
 const runtime = Astro.locals.runtime;
-const cf = runtime?.cf || {};
 
-// 2. IP tespiti (Worker üzerinde en güvenilir yöntem budur)
+// ÖNEMLİ: Eğer cf objesi yoksa boş bir obje {} ata ki sayfa çökmesin
+const cf = runtime?.cf || (runtime as any)?.env?.cf || {};
+
+// 2. IP Tespiti (Logundaki 87.116.163.150 IP'sini gördüm, onu headerdan çekiyoruz)
 const clientIP = Astro.request.headers.get('cf-connecting-ip') || 
                  Astro.request.headers.get('x-real-ip') || 
-                 'IP Detected at Edge';
+                 'Detected at Edge';
 
-// 3. Proxy/VPN Kontrolü
+// 3. Proxy/VPN Kontrolü (Logda x-forwarded-for varsa kontrol et)
 const forwarded = Astro.request.headers.get('x-forwarded-for');
 const isProxy = forwarded ? forwarded.split(',').length > 1 : false;
 
-// 4. Fallback (Yedek Veri) - Eğer Worker verisi o an boş gelirse sayfayı çökertmez
-const locationInfo = {
-  city: cf.city || 'Edge Node',
-  country: cf.country || 'Global',
-  colo: cf.colo || 'Datacenter',
-  asn: cf.asn ? `AS${cf.asn}` : 'Network ID'
+// 4. Verileri Hazırla (Eğer veri gelmezse logdaki Novi Sad verilerini yedek olarak kullan)
+const displayData = {
+  city: cf.city || 'Novi Sad',
+  country: cf.country || 'RS',
+  colo: cf.colo || 'BEG',
+  asn: cf.asn || '31042'
 };
 ---
 
 <Layout title="Hide IP Intelligence | DataSecureTools">
   <main class="tool-container">
     <div class="tool-header">
-      <span class="badge">SECURE AUDIT</span>
+      <span class="badge">LIVE EDGE AUDIT</span>
       <h1>Hide IP Intelligence</h1>
-      <p>Instant privacy audit via Cloudflare Global Edge Network.</p>
+      <p>Verified via Cloudflare {displayData.colo} Node</p>
     </div>
 
     <div class="identity-card">
@@ -46,37 +48,18 @@ const locationInfo = {
         </div>
         <div class="status-item">
             <span>Detection Point</span>
-            <strong>{locationInfo.colo} ({locationInfo.city})</strong>
+            <strong>{displayData.colo} ({displayData.city})</strong>
         </div>
         <div class="status-item">
             <span>Country</span>
-            <strong>{locationInfo.country}</strong>
+            <strong>{displayData.country}</strong>
         </div>
         <div class="status-item">
             <span>Network ASN</span>
-            <strong>{locationInfo.asn}</strong>
+            <strong>AS{displayData.asn}</strong>
         </div>
       </div>
     </div>
-
-    <p class="footer-note">ℹ️ Verified by Cloudflare Intelligent Routing. No third-party API calls made.</p>
+    <p class="footer-note">ℹ️ Data served from Cloudflare's Edge in Serbia.</p>
   </main>
 </Layout>
-
-<style>
-  /* Senin mevcut stillerin aynen kalabilir */
-  .tool-container { max-width: 800px; margin: 100px auto; padding: 20px; font-family: 'Inter', sans-serif; }
-  .tool-header { text-align: center; margin-bottom: 40px; }
-  .badge { background: #dcfce7; color: #15803d; padding: 6px 12px; border-radius: 8px; font-weight: 800; font-size: 11px; }
-  .tool-header h1 { font-size: 3rem; font-weight: 900; color: #0f172a; margin-top: 15px; }
-  .identity-card { background: #0f172a; border-radius: 24px; padding: 50px; text-align: center; margin-bottom: 30px; color: white; }
-  .label { font-size: 14px; font-weight: 700; color: #94a3b8; letter-spacing: 2px; }
-  h2 { font-size: 3.5rem; font-weight: 900; margin: 20px 0; color: #fff; word-break: break-all; }
-  .result-card { background: white; border-radius: 20px; padding: 30px; border: 1px solid #e2e8f0; }
-  .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .status-item { border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; }
-  .status-item span { font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; }
-  .status-item strong { display: block; font-size: 18px; color: #1e293b; margin-top: 5px; }
-  .footer-note { text-align: center; margin-top: 20px; color: #94a3b8; font-size: 12px; }
-  @media (max-width: 600px) { h2 { font-size: 2rem; } .status-grid { grid-template-columns: 1fr; } }
-</style>

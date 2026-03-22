@@ -1,8 +1,10 @@
 ﻿---
 import Layout from '../../layouts/MainLayout.astro';
 
-// Sunucu tarafında kullanıcının kendi IP'sini başlangıçta alalım
-const clientIP = Astro.request.headers.get('cf-connecting-ip') || '';
+// Sunucu tarafında kullanıcının kendi IP'sini daha güvenli alalım (Astro v6 + Cloudflare Uyumu)
+const clientIP = Astro.request.headers.get('cf-connecting-ip') || 
+                 Astro.request.headers.get('x-forwarded-for')?.split(',')[0] || 
+                 '';
 ---
 
 <Layout title="IP Intelligence & Global Lookup | DataSecureTools">
@@ -49,25 +51,26 @@ const clientIP = Astro.request.headers.get('cf-connecting-ip') || '';
       resArea.classList.add('hidden');
 
       try {
-        // ipwho.is yerine daha stabil olan ip-api.com kullanalım (CORS dostudur)
-        const response = await fetch(`https://demo.ip-api.com/json/${ip}?fields=66846719`);
+        // HTTPS destekleyen ve Browser üzerinden doğrudan erişilebilen (CORS dostu) API
+        const response = await fetch(`https://ipapi.co/${ip}/json/`);
         const data = await response.json();
 
-        if (data.status === "fail") {
-          throw new Error(data.message || "Invalid IP address");
+        if (data.error) {
+          throw new Error(data.reason || "Invalid IP address");
         }
 
-        document.getElementById('res-country').innerText = `${data.country} (${data.countryCode})`;
-        document.getElementById('res-city').innerText = `${data.city}, ${data.regionName}`;
-        document.getElementById('res-isp').innerText = data.isp || data.as;
-        document.getElementById('res-asn').innerText = data.as.split(' ')[0];
-        document.getElementById('res-lat').innerText = data.lat;
-        document.getElementById('res-lon').innerText = data.lon;
+        // Verileri yeni API formatına göre eşleştiriyoruz
+        document.getElementById('res-country').innerText = `${data.country_name} (${data.country_code})`;
+        document.getElementById('res-city').innerText = `${data.city}, ${data.region}`;
+        document.getElementById('res-isp').innerText = data.org || "N/A";
+        document.getElementById('res-asn').innerText = data.asn || "N/A";
+        document.getElementById('res-lat').innerText = data.latitude;
+        document.getElementById('res-lon').innerText = data.longitude;
 
         resArea.classList.remove('hidden');
       } catch (err) {
         console.error("Lookup Error:", err);
-        alert("API Error: Request blocked or IP not found. Please try a different IP.");
+        alert("API Error: " + err.message);
       } finally {
         btn.disabled = false;
         loader.classList.add('hidden');
@@ -81,7 +84,6 @@ const clientIP = Astro.request.headers.get('cf-connecting-ip') || '';
   </script>
 
   <style>
-    /* CSS kodların harika, onlara dokunmuyorum */
     .tool-container { max-width: 800px; margin: 100px auto; padding: 20px; font-family: sans-serif; }
     .tool-header { text-align: center; margin-bottom: 40px; }
     .badge { background: #eff6ff; color: #1d4ed8; padding: 5px 12px; border-radius: 6px; font-weight: 700; font-size: 11px; }

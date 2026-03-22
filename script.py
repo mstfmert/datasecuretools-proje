@@ -6,12 +6,12 @@ from datetime import datetime
 
 # API anahtarı GitHub Secrets'tan gelecek
 API_KEY = os.getenv("DEEPSEEK_API_KEY")
-API_URL = "https://api.deepseek.com/v1/chat/completions"
+API_URL = "[https://api.deepseek.com/v1/chat/completions](https://api.deepseek.com/v1/chat/completions)"
 
 def slugify(text):
     """Başlığı URL dostu dosya ismine dönüştürür."""
     text = text.lower()
-    # Türkçe karakter desteği gerekirse buraya ekleme yapılabilir, şu an İngilizce odaklı
+    # Türkçe ve özel karakter temizliği
     text = re.sub(r'[^a-z0-9]+', '-', text)
     return text.strip('-')
 
@@ -23,7 +23,7 @@ def generate_automated_blog():
     target_dir = os.path.join(os.getcwd(), 'src', 'content', 'blog')
     os.makedirs(target_dir, exist_ok=True)
 
-    # 1. GENİŞLETİLMİŞ KONU KATMANLARI (Hibrid Model)
+    # ÖZELLİK KORUNDU: GENİŞLETİLMİŞ KONU KATMANLARI
     categories = {
         "Web Performans & UX": [
             "Core Web Vitals 2026 Optimization", "Edge Computing for LCP", "INP Optimization Strategies",
@@ -43,60 +43,50 @@ def generate_automated_blog():
         ]
     }
 
-    # Rastgele bir kategori ve konu seçimi
     selected_cat = random.choice(list(categories.keys()))
     selected_topic = random.choice(categories[selected_cat])
-    
-    # Makale formatı çeşitliliği
     formats = ["Top 10 Tools for", "The Ultimate Guide to", "2026 Industry Report:", "How to Optimize", "Deep Dive Analysis:"]
     selected_format = random.choice(formats)
+    current_date = datetime.now().strftime('%Y-%m-%d')
 
-    # 2. GÜNCELLENMİŞ 2026 PROMPT
+    # ÖZELLİK KORUNDU: 2026 PROMPT YAPISI
+    # HATA DÜZELTME: Prompt'a "Asla markdown bloğu kullanma" ve "Schema zorunludur" eklendi.
     prompt = f"""
     ROLE: You are a Senior Tech Analyst & Full-Stack Developer at DataSecureTools.com. 
     TASK: Write a UNIQUE, high-quality technical blog post in English.
     
-    FOCUS: {selected_format} {selected_topic}
-    CATEGORY: {selected_cat}
+    IMPORTANT: You MUST start the file with the following YAML frontmatter exactly. 
+    Do not use any markdown code blocks (```) around the frontmatter.
 
-    1. STRUCTURE (STRICT):
     ---
-    title: "[Catchy Technical Title]"
-    description: "[150-char SEO summary focused on 2026 trends]"
-    pubDate: {datetime.now().strftime('%Y-%m-%d')}
+    title: "{selected_format} {selected_topic}"
+    description: "Deep dive into {selected_topic} within the 2026 ecosystem. Learn how DataSecureTools is leading the next-gen web analysis."
+    pubDate: {current_date}
     author: "DataSecureTools Research Labs"
     tags: ["{selected_cat}", "2026-Trends", "Web-Analysis"]
     ---
 
-    2. CONTENT RULES:
-    - Start with '# [Title]'.
+    1. CONTENT RULES:
+    - Start with '# {selected_format} {selected_topic}'.
     - Mention 'DataSecureTools' in the first paragraph.
     - CONTENT DEPTH: Min 1200 words. Use H2 (##) and H3 (###).
-    - INTEGRATION: Naturally link technical terms to DataSecureTools tools. 
-      Example: If discussing page speed, mention /tools/speed-test. 
-      Example: If discussing security, mention /tools/port-scanner or /tools/dns-lookup.
+    - INTEGRATION: Naturally link to /tools/speed-test, /tools/port-scanner, /tools/dns-lookup, or /tools/hide-ip.
     
-    3. 2026 TREND KEYWORDS (Sprinkle naturally):
+    2. 2026 TREND KEYWORDS:
     "Server-side rendering 2026", "Zero-latency APIs", "AI-driven search intent", "Data sovereignty", "Real-time network auditing".
 
-    4. AUTHORITY SIGNATURE:
-    End the post with: "This content was prepared by the DataSecure technical team and web analysts within the framework of 2026 digital standards."
-
-    5. LANGUAGE: Advanced, Professional Technical English.
+    3. AUTHORITY SIGNATURE:
+    End with: "This content was prepared by the DataSecure technical team and web analysts within the framework of 2026 digital standards."
     """
 
-    headers = {
-        "Authorization": f"Bearer {API_KEY}",
-        "Content-Type": "application/json"
-    }
-
+    headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
     data = {
         "model": "deepseek-chat",
         "messages": [
-            {"role": "system", "content": "You are a versatile technology expert. You solve real-world problems for WebMasters. You never repeat yourself."},
+            {"role": "system", "content": "You are a versatile technology expert. You ALWAYS provide the YAML frontmatter at the top. Never wrap the entire response in markdown code blocks."},
             {"role": "user", "content": prompt}
         ],
-        "temperature": 0.8,
+        "temperature": 0.7,
         "max_tokens": 4000
     }
 
@@ -105,21 +95,25 @@ def generate_automated_blog():
         response = requests.post(API_URL, json=data, headers=headers, timeout=240)
         response.raise_for_status()
         
-        content = response.json()['choices'][0]['message']['content']
+        content = response.json()['choices'][0]['message']['content'].strip()
         
+        # --- HATA DÜZELTME: Markdown Blok Temizleyici ---
+        # AI bazen tüm yanıtı ```markdown ... ``` içine alıyor, bu Astro'yu bozar.
         if content.startswith("```"):
-            content = "\n".join(content.split("\n")[1:-1])
+            content = re.sub(r'^```[a-z]*\n', '', content) # Başlangıç bloğunu sil
+            content = re.sub(r'\n```$', '', content)      # Bitiş bloğunu sil
 
+        # ÖZELLİK KORUNDU: Slugify tabanlı dosya adı
         title_match = re.search(r'title:\s*"(.*?)"', content)
         if title_match:
             filename = f"{slugify(title_match.group(1))}.md"
         else:
-            filename = f"tech-report-{datetime.now().strftime('%Y%m%d%H%M')}.md"
+            filename = f"report-{datetime.now().strftime('%Y%m%d%H%M')}.md"
 
         file_path = os.path.join(target_dir, filename)
 
         with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(content.strip())
+            f.write(content)
             
         print(f"✅ SUCCESS: {filename} published.")
 

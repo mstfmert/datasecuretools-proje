@@ -6,7 +6,8 @@ from datetime import datetime
 
 # API anahtarı GitHub Secrets'tan gelecek
 API_KEY = os.getenv("DEEPSEEK_API_KEY")
-API_URL = "[https://api.deepseek.com/v1/chat/completions](https://api.deepseek.com/v1/chat/completions)"
+# DÜZELTME: URL tertemiz hale getirildi, parantezler kaldırıldı.
+API_URL = "https://api.deepseek.com/v1/chat/completions"
 
 def slugify(text):
     """Başlığı URL dostu dosya ismine dönüştürür."""
@@ -23,7 +24,6 @@ def generate_automated_blog():
     target_dir = os.path.join(os.getcwd(), 'src', 'content', 'blog')
     os.makedirs(target_dir, exist_ok=True)
 
-    # ÖZELLİK KORUNDU: GENİŞLETİLMİŞ KONU KATMANLARI
     categories = {
         "Web Performans & UX": [
             "Core Web Vitals 2026 Optimization", "Edge Computing for LCP", "INP Optimization Strategies",
@@ -49,8 +49,6 @@ def generate_automated_blog():
     selected_format = random.choice(formats)
     current_date = datetime.now().strftime('%Y-%m-%d')
 
-    # ÖZELLİK KORUNDU: 2026 PROMPT YAPISI
-    # HATA DÜZELTME: Prompt'a "Asla markdown bloğu kullanma" ve "Schema zorunludur" eklendi.
     prompt = f"""
     ROLE: You are a Senior Tech Analyst & Full-Stack Developer at DataSecureTools.com. 
     TASK: Write a UNIQUE, high-quality technical blog post in English.
@@ -97,13 +95,12 @@ def generate_automated_blog():
         
         content = response.json()['choices'][0]['message']['content'].strip()
         
-        # --- HATA DÜZELTME: Markdown Blok Temizleyici ---
-        # AI bazen tüm yanıtı ```markdown ... ``` içine alıyor, bu Astro'yu bozar.
+        # DÜZELTME: Markdown blok temizliğini daha güvenli hale getirdik
         if content.startswith("```"):
-            content = re.sub(r'^```[a-z]*\n', '', content) # Başlangıç bloğunu sil
-            content = re.sub(r'\n```$', '', content)      # Bitiş bloğunu sil
+            content = re.sub(r'^```[a-z]*\n', '', content, flags=re.MULTILINE)
+            content = re.sub(r'\n```$', '', content, flags=re.MULTILINE)
 
-        # ÖZELLİK KORUNDU: Slugify tabanlı dosya adı
+        # Slugify tabanlı dosya adı belirleme
         title_match = re.search(r'title:\s*"(.*?)"', content)
         if title_match:
             filename = f"{slugify(title_match.group(1))}.md"
